@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>檔案預覽與下載</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            max-width: 900px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            background-color: #fafafa;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .btn-container {
+            margin-top: 25px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #0066cc;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .btn:hover {
+            background-color: #0052a3;
+            transform: translateY(-1px);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>檔案預覽</h1>
+        <p>您可以在下方直接預覽內容，或點擊按鈕開啟原檔。</p>
+
+        <div class="iframe-container">
+            <iframe 
+                src="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview" 
+                allow="autoplay">
+            </iframe>
+        </div>
+
+        <div class="btn-container">
+            <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
+               target="_blank" 
+               class="btn">
+                開啟 / 下載原始檔案
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
