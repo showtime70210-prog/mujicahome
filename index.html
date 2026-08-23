@@ -91,9 +91,9 @@
 </head>
 <body>
 
-    <!-- 音效元件 (防快取 + iOS 相容) -->
+    <!-- 音效元件 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music.mp3?v=3.0" type="audio/mpeg">
+        <source src="music.mp3?v=5.0" type="audio/mpeg">
     </audio>
 
     <!-- 帷幕幕布 -->
@@ -103,7 +103,7 @@
         <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
-    <!-- 新的 Google Drive 雲端影片區 -->
+    <!-- Google Drive 影片區 -->
     <div class="video-container">
         <iframe 
             id="videoIframe"
@@ -115,15 +115,16 @@
 
     <script>
         function startExperience() {
-            // 1. 點擊瞬間同步播放音效
+            // 1. 播放音效並鎖定最大音量
             const sound = document.getElementById('openSound');
+            sound.volume = 1.0; // 設定為最高音量 (100%)
             sound.currentTime = 0;
             sound.play().catch(e => console.log("音效受限:", e));
 
             // 2. 開啟帷幕動畫
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 2 秒後（音效放完）載入新的 Google Drive 雲端影片
+            // 3. 2 秒後載入 Google Drive 影片
             setTimeout(() => {
                 const iframe = document.getElementById('videoIframe');
                 iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
