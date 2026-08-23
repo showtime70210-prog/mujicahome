@@ -20,9 +20,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         /* 全螢幕帷幕容器 */
@@ -95,42 +95,51 @@
             pointer-events: none;
         }
 
-        /* 主網頁內容 */
+        /* 主網頁內容 (放寬放大) */
         .container {
             position: relative;
             z-index: 1;
             background: rgba(18, 16, 26, 0.85);
             backdrop-filter: blur(12px);
-            max-width: 960px;
-            width: 100%;
-            padding: 35px 25px;
+            width: 95vw;
+            max-width: 1600px;
+            height: 92vh;
+            padding: 20px 25px;
             border-radius: 16px;
             border: 1px solid rgba(138, 43, 226, 0.3);
             box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(138, 43, 226, 0.2);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header-section {
+            margin-bottom: 10px;
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             letter-spacing: 3px;
             color: #f5f5f5;
             text-shadow: 0 0 10px rgba(186, 85, 211, 0.6), 0 0 20px rgba(139, 0, 0, 0.5);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: #ba55d3;
             letter-spacing: 1.5px;
-            margin-bottom: 25px;
             font-weight: 300;
         }
 
+        /* 影片容器：佔滿剩餘大部分高度 */
         .iframe-container {
             position: relative;
             width: 100%;
-            height: 520px;
+            flex: 1;
+            margin: 10px 0;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid rgba(186, 85, 211, 0.4);
@@ -144,18 +153,17 @@
             border: none;
         }
 
-        .btn-container {
-            margin-top: 30px;
+        .footer-section {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn {
             display: inline-block;
-            padding: 14px 32px;
-            font-size: 1rem;
+            padding: 10px 28px;
+            font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: #ffffff;
@@ -174,8 +182,7 @@
         }
 
         footer {
-            margin-top: 25px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #777;
         }
     </style>
@@ -191,8 +198,10 @@
 
     <!-- 主頁面 -->
     <div class="container">
-        <h1>Ave Mujica</h1>
-        <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
+        <div class="header-section">
+            <h1>Ave Mujica</h1>
+            <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
+        </div>
 
         <div class="iframe-container">
             <iframe 
@@ -203,17 +212,16 @@
             </iframe>
         </div>
 
-        <div class="btn-container">
+        <div class="footer-section">
             <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
                target="_blank" 
                class="btn">
                 開啟 / 下載原始檔案
             </a>
+            <footer>
+                <p>&copy; mujicahome | All Rights Reserved</p>
+            </footer>
         </div>
-
-        <footer>
-            <p>&copy; mujicahome | All Rights Reserved</p>
-        </footer>
     </div>
 
     <script>
@@ -221,7 +229,7 @@
             // 1. 觸發拉開帷幕動畫
             document.getElementById('curtainContainer').classList.add('open');
             
-            // 2. 點擊後才載入與播放 iframe，繞過瀏覽器的未互動自動播放限制
+            // 2. 載入並播放影片
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
         }
