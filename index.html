@@ -30,16 +30,16 @@
             z-index: 9999;
             display: flex;
             cursor: pointer;
-            transition: opacity 0.5s ease, visibility 3.0s;
+            transition: opacity 0.5s ease, visibility 4.5s;
         }
 
-        /* 純 CSS 漸層帷幕，開啟動畫時間 2.8 秒 */
+        /* 純 CSS 漸層帷幕，開啟動畫時間延長至 4.2 秒 */
         .curtain {
             width: 50vw;
             height: 100dvh;
             background: linear-gradient(to bottom, #1a0005 0%, #4a0011 50%, #0a0003 100%);
             box-shadow: inset -10px 0 30px rgba(0,0,0,0.8);
-            transition: transform 2.8s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 4.2s cubic-bezier(0.77, 0, 0.175, 1);
             position: relative;
             display: flex;
             align-items: center;
@@ -226,12 +226,12 @@
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1ABQLFbeSmH36nu0DxK1h0f0jpJPuhdPa/preview?autoplay=1";
 
-            // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
+            // 2. 開啟慢速帷幕滑開動畫 (4.2 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 零延遲播放 222.mp3 開場音效，音量設定為 80% (0.8)
+            // 3. 零延遲播放 222.mp3 開場音效，音量設定為 70% (0.7)
             const sound = document.getElementById('openSound');
-            sound.volume = 0.8;
+            sound.volume = 0.7;
             sound.currentTime = 0;
             sound.play().catch(e => console.log("音效受限:", e));
         }
