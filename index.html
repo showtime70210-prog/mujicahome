@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Ave Mujica - Home</title>
     <style>
         * {
@@ -13,7 +13,8 @@
 
         html, body {
             width: 100vw;
-            height: 100vh;
+            /* 使用 dvh 自動適應手機瀏覽器工具列的高度變化 */
+            height: 100dvh;
             overflow: hidden;
             background: #000;
             font-family: 'Cinzel', 'Times New Roman', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -26,7 +27,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             z-index: 9999;
             display: flex;
             cursor: pointer;
@@ -35,7 +36,7 @@
 
         .curtain {
             width: 50vw;
-            height: 100vh;
+            height: 100dvh;
             background: linear-gradient(to bottom, #1a0005 0%, #4a0011 50%, #0a0003 100%);
             box-shadow: inset -10px 0 30px rgba(0,0,0,0.8);
             transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
@@ -60,17 +61,19 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: #f5f5f5;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
             text-shadow: 0 0 15px #ba55d3, 0 0 25px #8b0000;
             border: 1px solid rgba(186, 85, 211, 0.5);
-            padding: 18px 36px;
+            padding: 14px 24px;
             background: rgba(10, 0, 15, 0.85);
             border-radius: 6px;
             z-index: 10000;
             pointer-events: none;
             transition: opacity 0.5s;
             white-space: nowrap;
+            max-width: 90vw;
+            text-align: center;
         }
 
         .curtain-container.open .curtain-left {
@@ -89,13 +92,13 @@
             pointer-events: none;
         }
 
-        /* 頂部懸浮標題 (點擊穿透，不干擾影片點擊) */
+        /* 頂部懸浮標題 (點擊穿透) */
         .header-bar {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 12px 20px;
+            padding: 10px;
             background: linear-gradient(to bottom, rgba(10, 0, 15, 0.85) 0%, transparent 100%);
             z-index: 10;
             text-align: center;
@@ -103,8 +106,8 @@
         }
 
         h1 {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
             color: #f5f5f5;
             text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
             margin-bottom: 2px;
@@ -112,22 +115,22 @@
         }
 
         .subtitle {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #ba55d3;
             letter-spacing: 1px;
             font-weight: 300;
         }
 
-        /* 滿版影片視窗：底部 padding-bottom 預留 50px 保障 Google 控制列完全浮現 */
+        /* 影片視窗：使用 env(safe-area-inset-bottom) 自動避開 iPhone / Android 手機底部的操作條 */
         .video-viewport {
             position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             z-index: 1;
             background: #000;
-            padding-bottom: 50px; 
+            padding-bottom: calc(65px + env(safe-area-inset-bottom)); 
         }
 
         iframe {
@@ -139,15 +142,15 @@
         /* 右上角懸浮按鈕 */
         .footer-bar {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 10px;
+            right: 15px;
             z-index: 10;
         }
 
         .btn {
             display: inline-block;
-            padding: 6px 16px;
-            font-size: 0.75rem;
+            padding: 4px 12px;
+            font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: #ffffff;
