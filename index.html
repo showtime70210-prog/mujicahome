@@ -20,7 +20,7 @@
             color: #e0e0e0;
         }
 
-        /* 全螢幕帷幕容器 */
+        /* 帷幕容器 */
         .curtain-container {
             position: fixed;
             top: 0;
@@ -44,141 +44,85 @@
             align-items: center;
         }
 
-        .curtain-left {
-            border-right: 2px solid #ba55d3;
-            justify-content: flex-end;
-        }
-
-        .curtain-right {
-            border-left: 2px solid #ba55d3;
-            justify-content: flex-start;
-        }
+        .curtain-left { border-right: 2px solid #ba55d3; justify-content: flex-end; }
+        .curtain-right { border-left: 2px solid #ba55d3; justify-content: flex-start; }
 
         .curtain-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #f5f5f5;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: #f5f5f5; font-size: 1.2rem; letter-spacing: 2px;
             text-shadow: 0 0 15px #ba55d3, 0 0 25px #8b0000;
             border: 1px solid rgba(186, 85, 211, 0.5);
-            padding: 14px 24px;
-            background: rgba(10, 0, 15, 0.85);
-            border-radius: 6px;
-            z-index: 10000;
-            pointer-events: none;
-            transition: opacity 0.5s;
-            white-space: nowrap;
-            max-width: 90vw;
-            text-align: center;
+            padding: 14px 24px; background: rgba(10, 0, 15, 0.85);
+            border-radius: 6px; z-index: 10000; pointer-events: none;
+            transition: opacity 0.5s; white-space: nowrap;
         }
 
-        .curtain-container.open .curtain-left {
-            transform: translateX(-100%);
+        .curtain-container.open .curtain-left { transform: translateX(-100%); }
+        .curtain-container.open .curtain-right { transform: translateX(100%); }
+        .curtain-container.open .curtain-text { opacity: 0; }
+        .curtain-container.open { pointer-events: none; }
+
+        /* --- 實體切割版面設計 --- */
+        .layout-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100dvh;
+            background: #000;
         }
 
-        .curtain-container.open .curtain-right {
-            transform: translateX(100%);
-        }
-
-        .curtain-container.open .curtain-text {
-            opacity: 0;
-        }
-
-        .curtain-container.open {
-            pointer-events: none;
-        }
-
-        /* 頂部懸浮標題 */
+        /* 頂部懸浮標題 (不影響版面，純視覺) */
         .header-bar {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             padding: 8px 10px;
-            background: linear-gradient(to bottom, rgba(10, 0, 15, 0.85) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(10, 0, 15, 0.9) 0%, transparent 100%);
             z-index: 10;
             text-align: center;
             pointer-events: none;
         }
 
-        h1 {
-            font-size: 1rem;
-            letter-spacing: 2px;
-            color: #f5f5f5;
-            text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
-            text-transform: uppercase;
-        }
+        h1 { font-size: 0.9rem; letter-spacing: 2px; color: #f5f5f5; text-shadow: 0 0 10px rgba(186, 85, 211, 0.8); }
+        .subtitle { font-size: 0.65rem; color: #ba55d3; letter-spacing: 1px; font-weight: 300; }
 
-        .subtitle {
-            font-size: 0.65rem;
-            color: #ba55d3;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-
-        /* 影片容器 */
-        .main-wrapper {
+        /* 影片專屬區域 (佔據剩餘全部空間) */
+        .video-section {
+            flex: 1;
             width: 100vw;
-            height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            z-index: 1;
             background: #000;
-            padding-bottom: 50px;
-        }
-
-        .video-viewport {
-            width: 100vw;
-            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* 底部專屬控制欄（浮動按鈕） */
-        .floating-controls {
-            position: fixed;
-            bottom: calc(10px + env(safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 99;
+        /* 底部獨立控制列 (實體佔據空間，絕對不會跟影片重疊) */
+        .control-section {
+            height: 65px;
+            width: 100vw;
+            background: #0a000f;
+            border-top: 1px solid rgba(186, 85, 211, 0.3);
             display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 12px;
+            /* 針對 iPhone 底部白條自動墊高 */
+            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 20;
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 18px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #ffffff;
-            background: rgba(74, 0, 114, 0.9);
-            border: 1px solid rgba(186, 85, 211, 0.7);
-            border-radius: 20px;
-            text-decoration: none;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 8px 16px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
+            color: #ffffff; background: rgba(74, 0, 114, 0.8);
+            border: 1px solid rgba(186, 85, 211, 0.6); border-radius: 20px;
+            text-decoration: none; transition: all 0.3s ease; cursor: pointer;
         }
 
-        .btn:hover, .btn:active {
-            background: rgba(139, 0, 0, 0.95);
-            box-shadow: 0 0 15px rgba(186, 85, 211, 0.9);
+        .btn:active, .btn:hover {
+            background: rgba(139, 0, 0, 0.9); box-shadow: 0 0 15px rgba(186, 85, 211, 0.8);
         }
     </style>
 </head>
@@ -191,14 +135,16 @@
         <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
-    <div class="header-bar">
-        <h1>Ave Mujica</h1>
-        <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
-    </div>
+    <!-- 實體版面 -->
+    <div class="layout-wrapper" id="fullscreenLayout">
+        
+        <div class="header-bar">
+            <h1>Ave Mujica</h1>
+            <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
+        </div>
 
-    <!-- 影片主要容器 -->
-    <div class="main-wrapper" id="videoWrapper">
-        <div class="video-viewport">
+        <!-- 影片區 -->
+        <div class="video-section">
             <iframe 
                 id="videoIframe"
                 src="" 
@@ -206,16 +152,16 @@
                 allowfullscreen>
             </iframe>
         </div>
-    </div>
 
-    <!-- 底部獨立按鈕區 -->
-    <div class="floating-controls">
-        <button class="btn" onclick="goFullscreen()">⤢ 手機全螢幕</button>
-        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
-           target="_blank" 
-           class="btn">
-            開啟原始雲端
-        </a>
+        <!-- 獨立底部控制區 -->
+        <div class="control-section">
+            <button class="btn" onclick="goFullscreen()">⤢ 畫面最大化</button>
+            <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
+               target="_blank" class="btn">
+               開啟原始雲端
+            </a>
+        </div>
+
     </div>
 
     <script>
@@ -226,14 +172,12 @@
         }
 
         function goFullscreen() {
-            const wrapper = document.getElementById('videoWrapper');
+            const layout = document.getElementById('fullscreenLayout');
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (wrapper.requestFullscreen) {
-                    wrapper.requestFullscreen();
-                } else if (wrapper.webkitRequestFullscreen) {
-                    wrapper.webkitRequestFullscreen();
-                } else if (wrapper.msRequestFullscreen) {
-                    wrapper.msRequestFullscreen();
+                if (layout.requestFullscreen) {
+                    layout.requestFullscreen();
+                } else if (layout.webkitRequestFullscreen) { // Safari
+                    layout.webkitRequestFullscreen();
                 }
             } else {
                 if (document.exitFullscreen) {
