@@ -34,8 +34,7 @@
             height: 100vh;
             z-index: 9999;
             display: flex;
-            cursor: pointer;
-            transition: visibility 1.8s;
+            pointer-events: none; /* 讓點擊穿透 */
         }
 
         .curtain {
@@ -43,56 +42,25 @@
             height: 100vh;
             background: linear-gradient(to bottom, #1a0005 0%, #4a0011 50%, #0a0003 100%);
             box-shadow: inset -10px 0 30px rgba(0,0,0,0.8);
-            transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
             position: relative;
-            display: flex;
-            align-items: center;
         }
 
         .curtain-left {
             border-right: 2px solid #ba55d3;
-            justify-content: flex-end;
         }
 
         .curtain-right {
             border-left: 2px solid #ba55d3;
-            justify-content: flex-start;
         }
 
-        /* 帷幕中央提示文字 */
-        .curtain-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #f5f5f5;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px #ba55d3, 0 0 25px #8b0000;
-            border: 1px solid rgba(186, 85, 211, 0.5);
-            padding: 15px 30px;
-            background: rgba(10, 0, 15, 0.8);
-            border-radius: 4px;
-            z-index: 10000;
-            pointer-events: none;
-            transition: opacity 0.5s;
-        }
-
-        /* 點擊拉開動畫 */
+        /* 自動拉開帷幕動畫 */
         .curtain-container.open .curtain-left {
             transform: translateX(-100%);
         }
 
         .curtain-container.open .curtain-right {
             transform: translateX(100%);
-        }
-
-        .curtain-container.open .curtain-text {
-            opacity: 0;
-        }
-
-        .curtain-container.open {
-            pointer-events: none;
         }
 
         /* 主網頁內容 */
@@ -183,10 +151,9 @@
 <body>
 
     <!-- 帷幕結構 -->
-    <div class="curtain-container" id="curtainContainer" onclick="openCurtain()">
+    <div class="curtain-container" id="curtainContainer">
         <div class="curtain curtain-left"></div>
         <div class="curtain curtain-right"></div>
-        <div class="curtain-text">點擊揭幕 / CLICK TO ENTER</div>
     </div>
 
     <!-- 主頁面 -->
@@ -196,7 +163,8 @@
 
         <div class="iframe-container">
             <iframe 
-                src="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview" 
+                id="videoFrame"
+                src="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1" 
                 allow="autoplay; fullscreen" 
                 allowfullscreen>
             </iframe>
@@ -216,9 +184,12 @@
     </div>
 
     <script>
-        function openCurtain() {
-            document.getElementById('curtainContainer').classList.add('open');
-        }
+        // 當網頁載入完成後，延遲 0.3 秒自動拉開帷幕
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('curtainContainer').classList.add('open');
+            }, 300);
+        });
     </script>
 
 </body>
