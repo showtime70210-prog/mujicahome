@@ -20,7 +20,7 @@
             color: #e0e0e0;
         }
 
-        /* 帷幕幕布 */
+        /* 帷幕容器 */
         .curtain-container {
             position: fixed;
             top: 0;
@@ -33,19 +33,30 @@
             transition: opacity 0.5s ease, visibility 1.8s;
         }
 
+        /* 左右半邊帷幕：各自讀取同一張 curtain.jpg，並定位左右半邊 */
         .curtain {
             width: 50vw;
             height: 100dvh;
-            background: linear-gradient(to bottom, #1a0005 0%, #4a0011 50%, #0a0003 100%);
-            box-shadow: inset -10px 0 30px rgba(0,0,0,0.8);
+            background-image: url('curtain.jpg');
+            background-size: 100vw 100dvh; /* 強制整張圖寬度拉滿全螢幕 */
+            background-repeat: no-repeat;
             transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .curtain-left { border-right: 2px solid #ba55d3; justify-content: flex-end; }
-        .curtain-right { border-left: 2px solid #ba55d3; justify-content: flex-start; }
+        .curtain-left { 
+            border-right: 2px solid #ba55d3; 
+            justify-content: flex-end; 
+            background-position: left center; /* 左半邊顯示圖片左側 */
+        }
+        
+        .curtain-right { 
+            border-left: 2px solid #ba55d3; 
+            justify-content: flex-start; 
+            background-position: right center; /* 右半邊顯示圖片右側 */
+        }
 
         .curtain-text {
             position: absolute;
@@ -88,7 +99,7 @@
             border: none;
         }
 
-        /* 右上角純文字提示按鈕（附帶微光呼吸燈效果） */
+        /* 右上角點我選擇影片按鈕 */
         .menu-toggle-btn {
             position: fixed;
             top: 20px;
@@ -109,7 +120,6 @@
             animation: pulseGlow 2.5s infinite alternate;
         }
 
-        /* 呼吸燈效果，提升可點擊感 */
         @keyframes pulseGlow {
             0% {
                 box-shadow: 0 0 8px rgba(186, 85, 211, 0.4);
@@ -178,24 +188,20 @@
 </head>
 <body>
 
-    <!-- 音效元件 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3?v=10.0" type="audio/mpeg">
+        <source src="music2.mp3?v=12.0" type="audio/mpeg">
     </audio>
 
-    <!-- 帷幕幕布 -->
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
         <div class="curtain curtain-left"></div>
         <div class="curtain curtain-right"></div>
         <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
-    <!-- 右上角顯示純文字「點我選擇影片」按鈕 -->
     <button class="menu-toggle-btn" id="menuBtn" onclick="toggleSidebar()">
         點我選擇影片
     </button>
 
-    <!-- 右側側邊選單 -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-title">影片播放清單</div>
         <button class="video-btn active-video" onclick="switchVideo('1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39', this)">
@@ -206,7 +212,6 @@
         </button>
     </div>
 
-    <!-- Google Drive 影片區 -->
     <div class="video-container">
         <iframe 
             id="videoIframe"
@@ -218,38 +223,31 @@
 
     <script>
         function startExperience() {
-            // 1. 播放音效
             const sound = document.getElementById('openSound');
             sound.volume = 1.0;
             sound.currentTime = 0;
             sound.play().catch(e => console.log("音效受限:", e));
 
-            // 2. 開啟帷幕動畫
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 2 秒後載入第一個影片
             setTimeout(() => {
                 const iframe = document.getElementById('videoIframe');
                 iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
             }, 2000);
         }
 
-        // 開啟/關閉側邊欄
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
         }
 
-        // 切換影片
         function switchVideo(fileId, element) {
             const iframe = document.getElementById('videoIframe');
             iframe.src = `https://drive.google.com/file/d/${fileId}/preview?autoplay=1`;
 
-            // 高亮選取的按鈕
             const buttons = document.querySelectorAll('.video-btn');
             buttons.forEach(btn => btn.classList.remove('active-video'));
             element.classList.add('active-video');
 
-            // 收起側邊欄
             toggleSidebar();
         }
     </script>
