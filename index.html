@@ -13,7 +13,6 @@
 
         html, body {
             width: 100vw;
-            /* 使用 dvh 自動適應手機瀏覽器工具列的高度變化 */
             height: 100dvh;
             overflow: hidden;
             background: #000;
@@ -121,16 +120,27 @@
             font-weight: 300;
         }
 
-        /* 影片視窗：使用 env(safe-area-inset-bottom) 自動避開 iPhone / Android 手機底部的操作條 */
-        .video-viewport {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* 主容器：居中呈現，防止行動版播放器選單被垂直拉撐出外圍 */
+        .main-wrapper {
             width: 100vw;
             height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
             z-index: 1;
             background: #000;
-            padding-bottom: calc(65px + env(safe-area-inset-bottom)); 
+            padding: 45px 0 calc(20px + env(safe-area-inset-bottom));
+        }
+
+        /* 影片視窗：精準鎖定最大高度與寬度比例 */
+        .video-viewport {
+            width: 100vw;
+            height: 100%;
+            max-height: calc(100dvh - 70px - env(safe-area-inset-bottom));
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         iframe {
@@ -190,14 +200,16 @@
         </a>
     </div>
 
-    <!-- 影片視窗區域 -->
-    <div class="video-viewport">
-        <iframe 
-            id="videoIframe"
-            src="" 
-            allow="autoplay; fullscreen" 
-            allowfullscreen>
-        </iframe>
+    <!-- 影片主要容器 -->
+    <div class="main-wrapper">
+        <div class="video-viewport">
+            <iframe 
+                id="videoIframe"
+                src="" 
+                allow="autoplay; fullscreen" 
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
     <script>
