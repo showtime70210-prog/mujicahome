@@ -30,17 +30,17 @@
             z-index: 9999;
             display: flex;
             cursor: pointer;
-            transition: opacity 0.5s ease, visibility 1.8s;
+            transition: opacity 0.5s ease, visibility 3.0s;
         }
 
-        /* 左右半邊帷幕：各自讀取同一張 curtain.jpg，並定位左右半邊 */
+        /* 左右半邊帷幕：將開啟動畫時間拉長至 2.8 秒 (2.8s) */
         .curtain {
             width: 50vw;
             height: 100dvh;
             background-image: url('curtain.jpg');
-            background-size: 100vw 100dvh; /* 強制整張圖寬度拉滿全螢幕 */
+            background-size: 100vw 100dvh;
             background-repeat: no-repeat;
-            transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 2.8s cubic-bezier(0.77, 0, 0.175, 1);
             position: relative;
             display: flex;
             align-items: center;
@@ -49,13 +49,13 @@
         .curtain-left { 
             border-right: 2px solid #ba55d3; 
             justify-content: flex-end; 
-            background-position: left center; /* 左半邊顯示圖片左側 */
+            background-position: left center;
         }
         
         .curtain-right { 
             border-left: 2px solid #ba55d3; 
             justify-content: flex-start; 
-            background-position: right center; /* 右半邊顯示圖片右側 */
+            background-position: right center;
         }
 
         .curtain-text {
@@ -189,7 +189,7 @@
 <body>
 
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3?v=12.0" type="audio/mpeg">
+        <source src="music2.mp3?v=13.0" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -223,17 +223,20 @@
 
     <script>
         function startExperience() {
-            const sound = document.getElementById('openSound');
-            sound.volume = 1.0;
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("音效受限:", e));
+            // 1. 點擊瞬間立即發送影片請求，讓影片背景預載
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
 
+            // 2. 開啟慢速帷幕滑開動畫 (耗時 2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
+            // 3. 延遲 0.5 秒後播放開場音效
             setTimeout(() => {
-                const iframe = document.getElementById('videoIframe');
-                iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
-            }, 2000);
+                const sound = document.getElementById('openSound');
+                sound.volume = 1.0;
+                sound.currentTime = 0;
+                sound.play().catch(e => console.log("音效受限:", e));
+            }, 500);
         }
 
         function toggleSidebar() {
