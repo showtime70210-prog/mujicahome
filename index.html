@@ -11,18 +11,13 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Cinzel', 'Times New Roman', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0f linear-gradient(135deg, #0d0614 0%, #050508 50%, #150811 100%);
-            color: #e0e0e0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            position: relative;
+        html, body {
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+            background: #000;
+            font-family: 'Cinzel', 'Times New Roman', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #e0e0e0;
         }
 
         /* 全螢幕帷幕容器 */
@@ -59,7 +54,6 @@
             justify-content: flex-start;
         }
 
-        /* 帷幕中央提示文字 */
         .curtain-text {
             position: absolute;
             top: 50%;
@@ -78,7 +72,6 @@
             transition: opacity 0.5s;
         }
 
-        /* 點擊拉開動畫 */
         .curtain-container.open .curtain-left {
             transform: translateX(-100%);
         }
@@ -95,95 +88,88 @@
             pointer-events: none;
         }
 
-        /* 主網頁內容 (放寬放大) */
-        .container {
+        /* 滿版主頁面配置 */
+        .wrapper {
             position: relative;
-            z-index: 1;
-            background: rgba(18, 16, 26, 0.85);
-            backdrop-filter: blur(12px);
-            width: 95vw;
-            max-width: 1600px;
-            height: 92vh;
-            padding: 20px 25px;
-            border-radius: 16px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(138, 43, 226, 0.2);
-            text-align: center;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            background: #000;
         }
 
-        .header-section {
-            margin-bottom: 10px;
+        .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            background: linear-gradient(to bottom, rgba(10, 0, 15, 0.9) 0%, transparent 100%);
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             letter-spacing: 3px;
             color: #f5f5f5;
-            text-shadow: 0 0 10px rgba(186, 85, 211, 0.6), 0 0 20px rgba(139, 0, 0, 0.5);
-            margin-bottom: 4px;
+            text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
+            margin-bottom: 2px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #ba55d3;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             font-weight: 300;
         }
 
-        /* 影片容器：佔滿剩餘大部分高度 */
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            flex: 1;
-            margin: 10px 0;
-            border-radius: 10px;
+        /* 影片視窗：硬性撐滿整個螢幕 */
+        .video-viewport {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
             overflow: hidden;
-            border: 1px solid rgba(186, 85, 211, 0.4);
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0 8px 25px rgba(0, 0, 0, 0.6);
-            background-color: #000;
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            transform: scale(1.02); /* 稍微放大微調邊框 */
         }
 
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+        /* 懸浮底部控制列 */
+        .footer-bar {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            z-index: 10;
         }
 
         .btn {
             display: inline-block;
-            padding: 10px 28px;
-            font-size: 0.9rem;
+            padding: 8px 20px;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: #ffffff;
-            background: linear-gradient(135deg, #4a0072 0%, #8b0000 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
+            background: rgba(74, 0, 114, 0.7);
+            border: 1px solid rgba(186, 85, 211, 0.5);
+            border-radius: 20px;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(74, 0, 114, 0.4);
+            backdrop-filter: blur(5px);
             transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #6a009c 0%, #b22222 100%);
-            box-shadow: 0 0 20px rgba(186, 85, 211, 0.6);
-            transform: translateY(-2px);
-        }
-
-        footer {
-            font-size: 0.8rem;
-            color: #777;
+            background: rgba(139, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(186, 85, 211, 0.8);
         }
     </style>
 </head>
@@ -196,14 +182,14 @@
         <div class="curtain-text">點擊揭幕 / CLICK TO ENTER</div>
     </div>
 
-    <!-- 主頁面 -->
-    <div class="container">
-        <div class="header-section">
+    <!-- 滿版視覺主體 -->
+    <div class="wrapper">
+        <div class="header-bar">
             <h1>Ave Mujica</h1>
             <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
         </div>
 
-        <div class="iframe-container">
+        <div class="video-viewport">
             <iframe 
                 id="videoIframe"
                 src="" 
@@ -212,24 +198,18 @@
             </iframe>
         </div>
 
-        <div class="footer-section">
+        <div class="footer-bar">
             <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
                target="_blank" 
                class="btn">
-                開啟 / 下載原始檔案
+                原始檔案
             </a>
-            <footer>
-                <p>&copy; mujicahome | All Rights Reserved</p>
-            </footer>
         </div>
     </div>
 
     <script>
         function startExperience() {
-            // 1. 觸發拉開帷幕動畫
             document.getElementById('curtainContainer').classList.add('open');
-            
-            // 2. 載入並播放影片
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
         }
