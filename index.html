@@ -93,7 +93,7 @@
 
     <!-- 音效元件 (防快取 + iOS 相容) -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music.mp3?v=2.0" type="audio/mpeg">
+        <source src="music.mp3?v=3.0" type="audio/mpeg">
     </audio>
 
     <!-- 帷幕幕布 -->
@@ -103,7 +103,7 @@
         <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
-    <!-- Google Drive 雲端滿版影片區 -->
+    <!-- 新的 Google Drive 雲端影片區 -->
     <div class="video-container">
         <iframe 
             id="videoIframe"
@@ -123,10 +123,10 @@
             // 2. 開啟帷幕動畫
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 2 秒後（音效放完）載入你原本的 Google Drive 雲端影片
+            // 3. 2 秒後（音效放完）載入新的 Google Drive 雲端影片
             setTimeout(() => {
                 const iframe = document.getElementById('videoIframe');
-                iframe.src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
+                iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
             }, 2000);
         }
     </script>
