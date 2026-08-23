@@ -200,7 +200,7 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-title">播放清單</div>
-        <button class="video-btn active-video" onclick="switchVideo('1ABQLFbeSmH36nu0DxK1h0f0jpJPuhdPa', this)">
+        <button class="video-btn active-video" onclick="switchVideo('1du11Qdv-9NQXSJjONrBghmu5adxriAAB', this)">
             ▶ 第一首開場影片
         </button>
         <button class="video-btn" onclick="switchVideo('18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP', this)">
@@ -222,9 +222,9 @@
 
     <script>
         function startExperience() {
-            // 1. 點擊瞬間立即預載第一首影片
+            // 1. 點擊瞬間立即預載你指定的新第一首影片
             const iframe = document.getElementById('videoIframe');
-            iframe.src = "https://drive.google.com/file/d/1ABQLFbeSmH36nu0DxK1h0f0jpJPuhdPa/preview?autoplay=1";
+            iframe.src = "https://drive.google.com/file/d/1du11Qdv-9NQXSJjONrBghmu5adxriAAB/preview?autoplay=1";
 
             // 2. 開啟慢速帷幕滑開動畫 (4.2 秒)
             document.getElementById('curtainContainer').classList.add('open');
