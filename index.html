@@ -183,7 +183,7 @@
 </head>
 <body>
 
-    <!-- 使用專案內的 222.mp3 作為開場音效 -->
+    <!-- 使用 222.mp3 作為開場音效 -->
     <audio id="openSound" preload="auto" playsinline>
         <source src="222.mp3" type="audio/mpeg">
     </audio>
@@ -229,13 +229,11 @@
             // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 播放 222.mp3 開場音效
-            setTimeout(() => {
-                const sound = document.getElementById('openSound');
-                sound.volume = 1.0;
-                sound.currentTime = 0;
-                sound.play().catch(e => console.log("音效受限:", e));
-            }, 200);
+            // 3. 零延遲播放 222.mp3 開場音效，音量設定為 80% (0.8)
+            const sound = document.getElementById('openSound');
+            sound.volume = 0.8;
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("音效受限:", e));
         }
 
         function toggleSidebar() {
