@@ -129,8 +129,8 @@
         .sidebar {
             position: fixed;
             top: 0;
-            right: -270px;
-            width: 250px;
+            right: -280px;
+            width: 270px;
             height: 100dvh;
             background: rgba(10, 0, 15, 0.95);
             border-left: 1px solid rgba(186, 85, 211, 0.5);
@@ -138,7 +138,8 @@
             padding: 90px 15px 20px 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
+            overflow-y: auto;
             transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(12px);
         }
@@ -151,7 +152,7 @@
             font-size: 0.9rem;
             color: #ba55d3;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             border-bottom: 1px solid rgba(186, 85, 211, 0.3);
             padding-bottom: 5px;
         }
@@ -160,12 +161,13 @@
             background: rgba(30, 0, 40, 0.8);
             color: #e0e0e0;
             border: 1px solid rgba(186, 85, 211, 0.4);
-            padding: 12px 14px;
+            padding: 10px 14px;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-align: left;
             cursor: pointer;
             transition: all 0.3s;
+            line-height: 1.3;
         }
 
         .video-btn:hover, .video-btn.active-video {
@@ -178,7 +180,7 @@
 </head>
 <body>
 
-    <!-- 開場音效改為使用新的 Google 雲端音樂檔 -->
+    <!-- 開場音樂：Crucifix X -->
     <audio id="openSound" preload="auto" playsinline>
         <source src="https://drive.google.com/uc?export=download&id=18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP" type="audio/mpeg">
     </audio>
@@ -194,16 +196,15 @@
     </button>
 
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-title">影片播放清單</div>
-        <button class="video-btn active-video" onclick="switchVideo('1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39', this)">
-            ▶ 影片一 (主要)
+        <div class="sidebar-title">播放清單</div>
+        <button class="video-btn active-video" onclick="switchVideo('18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP', this)">
+            ▶ Crucifix X
         </button>
         <button class="video-btn" onclick="switchVideo('1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA', this)">
-            ▶ 影片二 (備用雲端)
+            ▶ Ave Mujica「顔」「Sophie」「‘S/’ The Way」「KiLLKiSS」
         </button>
-        <!-- 新增至播放清單的第三個選項 -->
         <button class="video-btn" onclick="switchVideo('18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP', this)">
-            ▶ 影片三 (新音樂來源)
+            ▶ Crucifix X
         </button>
     </div>
 
@@ -218,9 +219,9 @@
 
     <script>
         function startExperience() {
-            // 1. 點擊瞬間立即發送影片請求，讓影片背景預載
+            // 1. 點擊瞬間立即預載預設影片 (Crucifix X)
             const iframe = document.getElementById('videoIframe');
-            iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
+            iframe.src = "https://drive.google.com/file/d/18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP/preview?autoplay=1";
 
             // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
