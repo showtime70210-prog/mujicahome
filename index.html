@@ -30,7 +30,7 @@
             z-index: 9999;
             display: flex;
             cursor: pointer;
-            transition: visibility 1.8s;
+            transition: opacity 0.5s ease, visibility 1.8s;
         }
 
         .curtain {
@@ -88,7 +88,7 @@
             pointer-events: none;
         }
 
-        /* 影片放大容器 */
+        /* 影片填滿區域 */
         .video-viewport {
             position: absolute;
             top: 0;
@@ -103,16 +103,15 @@
             background: #000;
         }
 
-        /* 強制將 Google Preview 放大 1.35 倍衝破邊框 */
         iframe {
             width: 100vw;
             height: 100vh;
             border: none;
-            transform: scale(1.35);
+            transform: scale(1.15); /* 微調放大比例，去除黑邊又不失真 */
             transform-origin: center center;
         }
 
-        /* 頂部上方浮動標題 */
+        /* 頂部懸浮標題 */
         .header-bar {
             position: absolute;
             top: 0;
@@ -203,7 +202,10 @@
 
     <script>
         function startExperience() {
+            // 1. 拉開帷幕
             document.getElementById('curtainContainer').classList.add('open');
+            
+            // 2. 寫入影片來源並播放，不呼叫原生全螢幕 API
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
         }
