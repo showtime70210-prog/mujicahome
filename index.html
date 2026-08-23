@@ -183,9 +183,9 @@
 </head>
 <body>
 
-    <!-- 恢復為最一開始的開場音效 -->
+    <!-- 使用 music2.mp3 作為開場音效 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39" type="audio/mpeg">
+        <source src="music2.mp3" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -226,7 +226,7 @@
             // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 延遲 0.2 秒 (200ms) 後播放一開始的開場音效
+            // 3. 播放 music2.mp3 開場音效
             setTimeout(() => {
                 const sound = document.getElementById('openSound');
                 sound.volume = 1.0;
