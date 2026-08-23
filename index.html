@@ -33,30 +33,20 @@
             transition: opacity 0.5s ease, visibility 3.0s;
         }
 
-        /* 左右半邊帷幕：開啟動畫時間維持 2.8 秒 */
+        /* 恢復純 CSS 漸層帷幕，開啟動畫時間維持 2.8 秒 */
         .curtain {
             width: 50vw;
             height: 100dvh;
-            background-image: url('curtain.jpg');
-            background-size: 100vw 100dvh;
-            background-repeat: no-repeat;
+            background: linear-gradient(to bottom, #1a0005 0%, #4a0011 50%, #0a0003 100%);
+            box-shadow: inset -10px 0 30px rgba(0,0,0,0.8);
             transition: transform 2.8s cubic-bezier(0.77, 0, 0.175, 1);
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .curtain-left { 
-            border-right: 2px solid #ba55d3; 
-            justify-content: flex-end; 
-            background-position: left center;
-        }
-        
-        .curtain-right { 
-            border-left: 2px solid #ba55d3; 
-            justify-content: flex-start; 
-            background-position: right center;
-        }
+        .curtain-left { border-right: 2px solid #ba55d3; justify-content: flex-end; }
+        .curtain-right { border-left: 2px solid #ba55d3; justify-content: flex-start; }
 
         .curtain-text {
             position: absolute;
@@ -189,7 +179,7 @@
 <body>
 
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3?v=14.0" type="audio/mpeg">
+        <source src="music2.mp3?v=15.0" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -227,7 +217,7 @@
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
 
-            // 2. 開啟慢速帷幕滑開動畫
+            // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
             // 3. 延遲 0.2 秒 (200ms) 後播放開場音效
