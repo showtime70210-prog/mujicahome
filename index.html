@@ -183,7 +183,7 @@
 </head>
 <body>
 
-    <!-- 使用 222.mp3 作為開場音效 -->
+    <!-- 使用專案內的 222.mp3 作為開場音效 -->
     <audio id="openSound" preload="auto" playsinline>
         <source src="222.mp3" type="audio/mpeg">
     </audio>
@@ -200,7 +200,10 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-title">播放清單</div>
-        <button class="video-btn active-video" onclick="switchVideo('18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP', this)">
+        <button class="video-btn active-video" onclick="switchVideo('1ABQLFbeSmH36nu0DxK1h0f0jpJPuhdPa', this)">
+            ▶ 第一首開場影片
+        </button>
+        <button class="video-btn" onclick="switchVideo('18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP', this)">
             ▶ Crucifix X
         </button>
         <button class="video-btn" onclick="switchVideo('1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA', this)">
@@ -219,9 +222,9 @@
 
     <script>
         function startExperience() {
-            // 1. 點擊瞬間立即預載第一首影片 (Crucifix X)
+            // 1. 點擊瞬間立即預載第一首影片
             const iframe = document.getElementById('videoIframe');
-            iframe.src = "https://drive.google.com/file/d/18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP/preview?autoplay=1";
+            iframe.src = "https://drive.google.com/file/d/1ABQLFbeSmH36nu0DxK1h0f0jpJPuhdPa/preview?autoplay=1";
 
             // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
