@@ -183,9 +183,9 @@
 </head>
 <body>
 
-    <!-- 使用 333.mp3 作為開場音效 -->
+    <!-- 使用 444.mp3 作為開場音效 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="333.mp3" type="audio/mpeg">
+        <source src="444.mp3" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -229,7 +229,7 @@
             // 2. 開啟慢速帷幕滑開動畫 (4.2 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 零延遲播放 333.mp3 開場音效，音量設定為 70% (0.7)
+            // 3. 零延遲播放 444.mp3 開場音效，音量設定為 70% (0.7)
             const sound = document.getElementById('openSound');
             sound.volume = 0.7;
             sound.currentTime = 0;
