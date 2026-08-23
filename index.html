@@ -88,47 +88,49 @@
             border: none;
         }
 
-        /* 右側列表按鈕與側邊欄 */
+        /* 右上角帶文字清單按鈕 */
         .menu-toggle-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 100;
-            background: rgba(15, 0, 20, 0.85);
+            z-index: 100001;
+            background: rgba(15, 0, 20, 0.9);
             color: #ba55d3;
             border: 1px solid #ba55d3;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            font-size: 1.2rem;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(186, 85, 211, 0.3);
-            backdrop-filter: blur(5px);
+            gap: 6px;
+            box-shadow: 0 0 15px rgba(186, 85, 211, 0.6);
+            backdrop-filter: blur(8px);
             transition: all 0.3s;
         }
 
         .menu-toggle-btn:active {
-            transform: scale(0.9);
+            transform: scale(0.95);
         }
 
+        /* 側邊欄選單 */
         .sidebar {
             position: fixed;
             top: 0;
-            right: -260px;
-            width: 240px;
+            right: -270px;
+            width: 250px;
             height: 100dvh;
-            background: rgba(10, 0, 15, 0.92);
-            border-left: 1px solid rgba(186, 85, 211, 0.4);
-            z-index: 99;
-            padding: 80px 15px 20px 15px;
+            background: rgba(10, 0, 15, 0.95);
+            border-left: 1px solid rgba(186, 85, 211, 0.5);
+            z-index: 100000;
+            padding: 90px 15px 20px 15px;
             display: flex;
             flex-direction: column;
             gap: 12px;
             transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .sidebar.active {
@@ -140,31 +142,27 @@
             color: #ba55d3;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            text-transform: uppercase;
             border-bottom: 1px solid rgba(186, 85, 211, 0.3);
             padding-bottom: 5px;
         }
 
         .video-btn {
-            background: rgba(30, 0, 40, 0.7);
+            background: rgba(30, 0, 40, 0.8);
             color: #e0e0e0;
-            border: 1px solid rgba(186, 85, 211, 0.3);
+            border: 1px solid rgba(186, 85, 211, 0.4);
             padding: 12px 14px;
             border-radius: 6px;
             font-size: 0.85rem;
             text-align: left;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .video-btn:hover, .video-btn.active-video {
-            background: rgba(186, 85, 211, 0.25);
+            background: rgba(186, 85, 211, 0.35);
             border-color: #ba55d3;
             color: #fff;
-            box-shadow: 0 0 10px rgba(186, 85, 211, 0.4);
+            box-shadow: 0 0 12px rgba(186, 85, 211, 0.5);
         }
     </style>
 </head>
@@ -172,7 +170,7 @@
 
     <!-- 音效元件 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3?v=7.0" type="audio/mpeg">
+        <source src="music2.mp3?v=9.0" type="audio/mpeg">
     </audio>
 
     <!-- 帷幕幕布 -->
@@ -182,16 +180,18 @@
         <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
-    <!-- 右上角選單按鈕 -->
-    <button class="menu-toggle-btn" id="menuBtn" style="display:none;" onclick="toggleSidebar()">☰</button>
+    <!-- 右上角顯示「☰ 影片清單」按鈕 -->
+    <button class="menu-toggle-btn" id="menuBtn" onclick="toggleSidebar()">
+        ☰ 影片清單
+    </button>
 
     <!-- 右側側邊選單 -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-title">影片播放清單</div>
-        <button class="video-btn active-video" id="btn1" onclick="switchVideo('1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39', this)">
+        <button class="video-btn active-video" onclick="switchVideo('1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39', this)">
             ▶ 影片一 (主要)
         </button>
-        <button class="video-btn" id="btn2" onclick="switchVideo('1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA', this)">
+        <button class="video-btn" onclick="switchVideo('1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA', this)">
             ▶ 影片二 (備用雲端)
         </button>
     </div>
@@ -217,15 +217,14 @@
             // 2. 開啟帷幕動畫
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 2 秒後載入第一個影片並顯示右側選單按鈕
+            // 3. 2 秒後載入第一個影片
             setTimeout(() => {
                 const iframe = document.getElementById('videoIframe');
                 iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
-                document.getElementById('menuBtn').style.display = "flex";
             }, 2000);
         }
 
-        // 開啟/關閉右側側邊欄
+        // 開啟/關閉側邊欄
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
         }
@@ -235,12 +234,12 @@
             const iframe = document.getElementById('videoIframe');
             iframe.src = `https://drive.google.com/file/d/${fileId}/preview?autoplay=1`;
 
-            // 更新按鈕高亮狀態
+            // 高亮選取的按鈕
             const buttons = document.querySelectorAll('.video-btn');
             buttons.forEach(btn => btn.classList.remove('active-video'));
             element.classList.add('active-video');
 
-            // 自動關閉側邊欄
+            // 收起側邊欄
             toggleSidebar();
         }
     </script>
