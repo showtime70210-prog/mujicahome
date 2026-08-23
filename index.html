@@ -183,9 +183,9 @@
 </head>
 <body>
 
-    <!-- 使用 music2.mp3 作為開場音效 -->
+    <!-- 使用 222.mp3 作為開場音效 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3" type="audio/mpeg">
+        <source src="222.mp3" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -226,7 +226,7 @@
             // 2. 開啟慢速帷幕滑開動畫 (2.8 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 播放 music2.mp3 開場音效
+            // 3. 播放 222.mp3 開場音效
             setTimeout(() => {
                 const sound = document.getElementById('openSound');
                 sound.volume = 1.0;
