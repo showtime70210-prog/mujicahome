@@ -15,14 +15,9 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #000;
             font-family: 'Cinzel', 'Times New Roman', -apple-system, BlinkMacSystemFont, sans-serif;
             color: #e0e0e0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 0; /* 極窄邊距，釋放最大顯示空間 */
         }
 
         /* 全螢幕帷幕容器 */
@@ -94,38 +89,45 @@
             pointer-events: none;
         }
 
-        /* 頂部精簡標題區域 */
+        /* 頂部懸浮標題 (點擊穿透，不干擾影片點擊) */
         .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            text-align: center;
+            padding: 12px 20px;
+            background: linear-gradient(to bottom, rgba(10, 0, 15, 0.85) 0%, transparent 100%);
             z-index: 10;
+            text-align: center;
+            pointer-events: none;
         }
 
         h1 {
-            font-size: 1.1rem;
-            letter-spacing: 2px;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
             color: #f5f5f5;
             text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
+            margin-bottom: 2px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #ba55d3;
             letter-spacing: 1px;
             font-weight: 300;
         }
 
-        /* 放大版影片視窗區域 */
+        /* 滿版影片視窗：底部 padding-bottom 預留 50px 保障 Google 控制列完全浮現 */
         .video-viewport {
-            width: 99vw;
-            height: calc(100vh - 65px); /* 向上壓榨極限空間，同時保留底部選單高度 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 1;
             background: #000;
-            border: 1px solid rgba(186, 85, 211, 0.3);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            padding-bottom: 50px; 
         }
 
         iframe {
@@ -134,23 +136,24 @@
             border: none;
         }
 
-        /* 底部精簡按鈕區 */
+        /* 右上角懸浮按鈕 */
         .footer-bar {
-            width: 100%;
-            text-align: center;
+            position: absolute;
+            top: 15px;
+            right: 20px;
             z-index: 10;
         }
 
         .btn {
             display: inline-block;
-            padding: 3px 16px;
+            padding: 6px 16px;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: #ffffff;
             background: rgba(74, 0, 114, 0.75);
             border: 1px solid rgba(186, 85, 211, 0.5);
-            border-radius: 15px;
+            border-radius: 20px;
             text-decoration: none;
             backdrop-filter: blur(5px);
             transition: all 0.3s ease;
@@ -176,6 +179,14 @@
         <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
     </div>
 
+    <div class="footer-bar">
+        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
+           target="_blank" 
+           class="btn">
+            開啟原始雲端
+        </a>
+    </div>
+
     <!-- 影片視窗區域 -->
     <div class="video-viewport">
         <iframe 
@@ -184,14 +195,6 @@
             allow="autoplay; fullscreen" 
             allowfullscreen>
         </iframe>
-    </div>
-
-    <div class="footer-bar">
-        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
-           target="_blank" 
-           class="btn">
-            開啟原始雲端
-        </a>
     </div>
 
     <script>
