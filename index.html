@@ -88,24 +88,31 @@
             pointer-events: none;
         }
 
-        /* 滿版影片背景 */
+        /* 影片放大容器 */
         .video-viewport {
-            width: 100vw;
-            height: 100vh;
             position: absolute;
             top: 0;
             left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 1;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* 可改為 cover 強制填滿無視黑邊 */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: #000;
         }
 
-        /* 懸浮標題與按鈕 */
+        /* 強制將 Google Preview 放大 1.35 倍衝破邊框 */
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            transform: scale(1.35);
+            transform-origin: center center;
+        }
+
+        /* 頂部上方浮動標題 */
         .header-bar {
             position: absolute;
             top: 0;
@@ -176,12 +183,14 @@
         <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
     </div>
 
-    <!-- 原生全螢幕影片播放器 -->
+    <!-- 影片視窗區域 -->
     <div class="video-viewport">
-        <video id="mainVideo" controls playsinline>
-            <source src="https://lh3.googleusercontent.com/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA" type="video/mp4">
-            您的瀏覽器不支援影片播放。
-        </video>
+        <iframe 
+            id="videoIframe"
+            src="" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen>
+        </iframe>
     </div>
 
     <div class="footer-bar">
@@ -194,20 +203,9 @@
 
     <script>
         function startExperience() {
-            // 拉開帷幕
             document.getElementById('curtainContainer').classList.add('open');
-            
-            // 播放原生影片並要求全螢幕
-            const video = document.getElementById('mainVideo');
-            video.play();
-            
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.webkitRequestFullscreen) { /* Safari */
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) { /* IE/Edge */
-                video.msRequestFullscreen();
-            }
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
         }
     </script>
 
