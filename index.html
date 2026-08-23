@@ -12,12 +12,17 @@
         }
 
         html, body {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
-            background: #000;
+            background: #0a0a0f;
             font-family: 'Cinzel', 'Times New Roman', -apple-system, BlinkMacSystemFont, sans-serif;
             color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
         }
 
         /* 全螢幕帷幕容器 */
@@ -70,6 +75,7 @@
             z-index: 10000;
             pointer-events: none;
             transition: opacity 0.5s;
+            white-space: nowrap;
         }
 
         .curtain-container.open .curtain-left {
@@ -88,39 +94,16 @@
             pointer-events: none;
         }
 
-        /* 滿版影片視窗區域 (完全呈現 Google 播放器) */
-        .video-viewport {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            background: #000;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            /* 移除原先的 scale 放大，確保底部控制列完好保留在畫面上 */
-        }
-
-        /* 頂部懸浮標題 (穿透點擊，不擋播放器) */
+        /* 頂部標題區域 */
         .header-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(to bottom, rgba(10, 0, 15, 0.85) 0%, transparent 100%);
-            z-index: 10;
             text-align: center;
-            pointer-events: none;
+            z-index: 10;
+            padding-bottom: 8px;
         }
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             letter-spacing: 3px;
             color: #f5f5f5;
             text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
@@ -135,17 +118,36 @@
             font-weight: 300;
         }
 
-        /* 頂部右上角懸浮下載按鈕，避開底部控制列 */
+        /* 影片視窗區域 */
+        .video-viewport {
+            width: 96vw;
+            height: calc(100vh - 120px);
+            max-width: 1600px;
+            z-index: 1;
+            background: #000;
+            border: 1px solid rgba(186, 85, 211, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 底部按鈕區 */
         .footer-bar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            width: 100%;
+            text-align: center;
             z-index: 10;
+            padding-top: 6px;
         }
 
         .btn {
             display: inline-block;
-            padding: 8px 18px;
+            padding: 6px 20px;
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
@@ -170,20 +172,12 @@
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
         <div class="curtain curtain-left"></div>
         <div class="curtain curtain-right"></div>
-        <div class="curtain-text">點擊揭幕 / CLICK TO ENTER</div>
+        <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
     <div class="header-bar">
         <h1>Ave Mujica</h1>
         <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
-    </div>
-
-    <div class="footer-bar">
-        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
-           target="_blank" 
-           class="btn">
-            開啟原始雲端
-        </a>
     </div>
 
     <!-- 影片視窗區域 -->
@@ -194,6 +188,14 @@
             allow="autoplay; fullscreen" 
             allowfullscreen>
         </iframe>
+    </div>
+
+    <div class="footer-bar">
+        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
+           target="_blank" 
+           class="btn">
+            開啟原始雲端
+        </a>
     </div>
 
     <script>
