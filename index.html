@@ -91,25 +91,24 @@
             pointer-events: none;
         }
 
-        /* 頂部懸浮標題 (嚴格避開左右兩側控制鈕，並穿透點擊) */
+        /* 頂部懸浮標題 */
         .header-bar {
             position: absolute;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60vw;
-            padding: 6px 0;
+            left: 0;
+            width: 100%;
+            padding: 8px 10px;
+            background: linear-gradient(to bottom, rgba(10, 0, 15, 0.85) 0%, transparent 100%);
             z-index: 10;
             text-align: center;
             pointer-events: none;
         }
 
         h1 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             letter-spacing: 2px;
             color: #f5f5f5;
             text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
-            margin-bottom: 2px;
             text-transform: uppercase;
         }
 
@@ -118,12 +117,9 @@
             color: #ba55d3;
             letter-spacing: 1px;
             font-weight: 300;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
-        /* 主容器 */
+        /* 影片容器 */
         .main-wrapper {
             width: 100vw;
             height: 100dvh;
@@ -133,7 +129,7 @@
             position: relative;
             z-index: 1;
             background: #000;
-            padding-bottom: env(safe-area-inset-bottom);
+            padding-bottom: 50px;
         }
 
         .video-viewport {
@@ -150,32 +146,39 @@
             border: none;
         }
 
-        /* 右上角懸浮按鈕區 (縮小邊距不擋播放器圖示) */
-        .footer-bar {
-            position: absolute;
-            top: 6px;
-            right: 8px;
-            z-index: 20;
+        /* 底部專屬控制欄（浮動按鈕） */
+        .floating-controls {
+            position: fixed;
+            bottom: calc(10px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99;
+            display: flex;
+            gap: 12px;
         }
 
         .btn {
-            display: inline-block;
-            padding: 3px 8px;
-            font-size: 0.65rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 18px;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: #ffffff;
-            background: rgba(74, 0, 114, 0.85);
-            border: 1px solid rgba(186, 85, 211, 0.6);
-            border-radius: 12px;
+            background: rgba(74, 0, 114, 0.9);
+            border: 1px solid rgba(186, 85, 211, 0.7);
+            border-radius: 20px;
             text-decoration: none;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .btn:hover {
-            background: rgba(139, 0, 0, 0.9);
-            box-shadow: 0 0 15px rgba(186, 85, 211, 0.8);
+        .btn:hover, .btn:active {
+            background: rgba(139, 0, 0, 0.95);
+            box-shadow: 0 0 15px rgba(186, 85, 211, 0.9);
         }
     </style>
 </head>
@@ -193,16 +196,8 @@
         <p class="subtitle">Ave Mujica「顔」「Sophie」「‘S_’ The Way」「KiLLKiSS」</p>
     </div>
 
-    <div class="footer-bar">
-        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
-           target="_blank" 
-           class="btn">
-            開啟原始雲端
-        </a>
-    </div>
-
     <!-- 影片主要容器 -->
-    <div class="main-wrapper">
+    <div class="main-wrapper" id="videoWrapper">
         <div class="video-viewport">
             <iframe 
                 id="videoIframe"
@@ -213,11 +208,40 @@
         </div>
     </div>
 
+    <!-- 底部獨立按鈕區 -->
+    <div class="floating-controls">
+        <button class="btn" onclick="goFullscreen()">⤢ 手機全螢幕</button>
+        <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
+           target="_blank" 
+           class="btn">
+            開啟原始雲端
+        </a>
+    </div>
+
     <script>
         function startExperience() {
             document.getElementById('curtainContainer').classList.add('open');
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
+        }
+
+        function goFullscreen() {
+            const wrapper = document.getElementById('videoWrapper');
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (wrapper.requestFullscreen) {
+                    wrapper.requestFullscreen();
+                } else if (wrapper.webkitRequestFullscreen) {
+                    wrapper.webkitRequestFullscreen();
+                } else if (wrapper.msRequestFullscreen) {
+                    wrapper.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
         }
     </script>
 
