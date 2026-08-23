@@ -22,7 +22,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 20px;
+            padding: 5px 0; /* 極窄邊距，釋放最大顯示空間 */
         }
 
         /* 全螢幕帷幕容器 */
@@ -94,39 +94,36 @@
             pointer-events: none;
         }
 
-        /* 頂部標題區域 */
+        /* 頂部精簡標題區域 */
         .header-bar {
             width: 100%;
             text-align: center;
             z-index: 10;
-            padding-bottom: 8px;
         }
 
         h1 {
-            font-size: 1.4rem;
-            letter-spacing: 3px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
             color: #f5f5f5;
             text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
-            margin-bottom: 2px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #ba55d3;
             letter-spacing: 1px;
             font-weight: 300;
         }
 
-        /* 影片視窗區域 */
+        /* 放大版影片視窗區域 */
         .video-viewport {
-            width: 96vw;
-            height: calc(100vh - 120px);
-            max-width: 1600px;
+            width: 99vw;
+            height: calc(100vh - 65px); /* 向上壓榨極限空間，同時保留底部選單高度 */
             z-index: 1;
             background: #000;
             border: 1px solid rgba(186, 85, 211, 0.3);
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
@@ -137,24 +134,23 @@
             border: none;
         }
 
-        /* 底部按鈕區 */
+        /* 底部精簡按鈕區 */
         .footer-bar {
             width: 100%;
             text-align: center;
             z-index: 10;
-            padding-top: 6px;
         }
 
         .btn {
             display: inline-block;
-            padding: 6px 20px;
-            font-size: 0.8rem;
+            padding: 3px 16px;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: #ffffff;
             background: rgba(74, 0, 114, 0.75);
             border: 1px solid rgba(186, 85, 211, 0.5);
-            border-radius: 20px;
+            border-radius: 15px;
             text-decoration: none;
             backdrop-filter: blur(5px);
             transition: all 0.3s ease;
