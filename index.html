@@ -33,7 +33,7 @@
             transition: opacity 0.5s ease, visibility 3.0s;
         }
 
-        /* 恢復純 CSS 漸層帷幕，開啟動畫時間維持 2.8 秒 */
+        /* 純 CSS 漸層帷幕，開啟動畫時間 2.8 秒 */
         .curtain {
             width: 50vw;
             height: 100dvh;
@@ -178,8 +178,9 @@
 </head>
 <body>
 
+    <!-- 開場音效改為使用新的 Google 雲端音樂檔 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3?v=15.0" type="audio/mpeg">
+        <source src="https://drive.google.com/uc?export=download&id=18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -199,6 +200,10 @@
         </button>
         <button class="video-btn" onclick="switchVideo('1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA', this)">
             ▶ 影片二 (備用雲端)
+        </button>
+        <!-- 新增至播放清單的第三個選項 -->
+        <button class="video-btn" onclick="switchVideo('18kpojQuyOOAMvy_VwdPC8qneopRZ2XvP', this)">
+            ▶ 影片三 (新音樂來源)
         </button>
     </div>
 
