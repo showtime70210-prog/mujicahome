@@ -5,67 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ave Mujica - Home</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            width: 100vw;
-            height: 100dvh;
-            overflow: hidden;
-            background: #000;
-            font-family: 'Cinzel', -apple-system, sans-serif;
-            color: #e0e0e0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { width: 100vw; height: 100dvh; overflow: hidden; background: #000; font-family: sans-serif; }
 
         /* 帷幕幕布 */
         .curtain-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100dvh;
-            z-index: 9999;
-            display: flex;
-            cursor: pointer;
-            transition: opacity 0.5s ease, visibility 1.8s;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; z-index: 9999;
+            display: flex; cursor: pointer; transition: opacity 0.5s, visibility 1.8s;
         }
-
         .curtain {
-            width: 50vw;
-            height: 100dvh;
+            width: 50vw; height: 100dvh;
             background: linear-gradient(to bottom, #1a0005 0%, #4a0011 50%, #0a0003 100%);
-            box-shadow: inset -10px 0 30px rgba(0,0,0,0.8);
             transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
-            position: relative;
-            display: flex;
-            align-items: center;
         }
-
-        .curtain-left { border-right: 2px solid #ba55d3; justify-content: flex-end; }
-        .curtain-right { border-left: 2px solid #ba55d3; justify-content: flex-start; }
-
+        .curtain-left { border-right: 2px solid #ba55d3; }
+        .curtain-right { border-left: 2px solid #ba55d3; }
         .curtain-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #f5f5f5;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px #ba55d3, 0 0 25px #8b0000;
-            border: 1px solid rgba(186, 85, 211, 0.5);
-            padding: 14px 24px;
-            background: rgba(10, 0, 15, 0.85);
-            border-radius: 6px;
-            z-index: 10000;
-            pointer-events: none;
-            transition: opacity 0.5s;
-            white-space: nowrap;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: #fff; padding: 14px 24px; background: rgba(10, 0, 15, 0.85);
+            border: 1px solid #ba55d3; border-radius: 6px; white-space: nowrap;
         }
-
         .curtain-container.open .curtain-left { transform: translateX(-100%); }
         .curtain-container.open .curtain-right { transform: translateX(100%); }
         .curtain-container.open .curtain-text { opacity: 0; }
@@ -98,12 +57,12 @@
         <div class="curtain-text">歡迎來到 Ave Mujica 的世界</div>
     </div>
 
-    <!-- YouTube 滿版影片區 -->
+    <!-- 純淨滿版影片區 -->
     <div class="video-container">
         <iframe 
             id="videoIframe"
             src="" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+            allow="autoplay; fullscreen" 
             allowfullscreen>
         </iframe>
     </div>
@@ -111,9 +70,7 @@
     <script>
         function startExperience() {
             document.getElementById('curtainContainer').classList.add('open');
-            const iframe = document.getElementById('videoIframe');
-            /* 自動播放並允許全螢幕 */
-            iframe.src = "https://www.youtube.com/embed/mBplXytkpP0?autoplay=1&playsinline=1";
+            document.getElementById('videoIframe').src = "https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview?autoplay=1";
         }
     </script>
 
