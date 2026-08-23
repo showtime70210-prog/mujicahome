@@ -33,7 +33,7 @@
             transition: opacity 0.5s ease, visibility 3.0s;
         }
 
-        /* 左右半邊帷幕：將開啟動畫時間拉長至 2.8 秒 (2.8s) */
+        /* 左右半邊帷幕：開啟動畫時間維持 2.8 秒 */
         .curtain {
             width: 50vw;
             height: 100dvh;
@@ -189,7 +189,7 @@
 <body>
 
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music2.mp3?v=13.0" type="audio/mpeg">
+        <source src="music2.mp3?v=14.0" type="audio/mpeg">
     </audio>
 
     <div class="curtain-container" id="curtainContainer" onclick="startExperience()">
@@ -227,16 +227,16 @@
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1pZTyUgB34-nDn2ZTAyAy_ZwJxNkQac39/preview?autoplay=1";
 
-            // 2. 開啟慢速帷幕滑開動畫 (耗時 2.8 秒)
+            // 2. 開啟慢速帷幕滑開動畫
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 延遲 0.5 秒後播放開場音效
+            // 3. 延遲 0.2 秒 (200ms) 後播放開場音效
             setTimeout(() => {
                 const sound = document.getElementById('openSound');
                 sound.volume = 1.0;
                 sound.currentTime = 0;
                 sound.play().catch(e => console.log("音效受限:", e));
-            }, 500);
+            }, 200);
         }
 
         function toggleSidebar() {
