@@ -91,9 +91,9 @@
 </head>
 <body>
 
-    <!-- 音效元件 -->
+    <!-- 吃新的音效檔名稱 music2.mp3 -->
     <audio id="openSound" preload="auto" playsinline>
-        <source src="music.mp3?v=5.0" type="audio/mpeg">
+        <source src="music2.mp3?v=6.0" type="audio/mpeg">
     </audio>
 
     <!-- 帷幕幕布 -->
@@ -115,9 +115,9 @@
 
     <script>
         function startExperience() {
-            // 1. 播放音效並鎖定最大音量
+            // 1. 播放新音效並設定最大音量
             const sound = document.getElementById('openSound');
-            sound.volume = 1.0; // 設定為最高音量 (100%)
+            sound.volume = 1.0;
             sound.currentTime = 0;
             sound.play().catch(e => console.log("音效受限:", e));
 
