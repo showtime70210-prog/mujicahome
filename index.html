@@ -3,93 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>檔案預覽與下載</title>
+    <title>Ave Mujica - Home</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
+            font-family: 'Cinzel', 'Times New Roman', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f linear-gradient(135deg, #0d0614 0%, #050508 50%, #150811 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* 背景哥德視覺光效 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(139, 0, 0, 0.1) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .container {
-            background-color: #ffffff;
-            max-width: 900px;
+            position: relative;
+            z-index: 1;
+            background: rgba(18, 16, 26, 0.85);
+            backdrop-filter: blur(12px);
+            max-width: 960px;
             width: 100%;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 35px 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(138, 43, 226, 0.2);
             text-align: center;
         }
+
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            color: #f5f5f5;
+            text-shadow: 0 0 10px rgba(186, 85, 211, 0.6), 0 0 20px rgba(139, 0, 0, 0.5);
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
-        p {
-            color: #666;
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: #ba55d3;
+            letter-spacing: 1.5px;
             margin-bottom: 25px;
+            font-weight: 300;
         }
+
+        /* 影片預覽容器 */
         .iframe-container {
             position: relative;
             width: 100%;
-            height: 550px;
-            border-radius: 8px;
+            height: 520px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid #e0e0e0;
-            background-color: #fafafa;
+            border: 1px solid rgba(186, 85, 211, 0.4);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0 8px 25px rgba(0, 0, 0, 0.6);
+            background-color: #000;
         }
+
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+
+        /* 按鈕區域 */
         .btn-container {
-            margin-top: 25px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
+
         .btn {
             display: inline-block;
-            padding: 12px 28px;
+            padding: 14px 32px;
             font-size: 1rem;
             font-weight: 600;
+            letter-spacing: 1px;
             color: #ffffff;
-            background-color: #0066cc;
-            border: none;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #4a0072 0%, #8b0000 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
             text-decoration: none;
-            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(74, 0, 114, 0.4);
+            transition: all 0.3s ease;
         }
+
         .btn:hover {
-            background-color: #0052a3;
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #6a009c 0%, #b22222 100%);
+            box-shadow: 0 0 20px rgba(186, 85, 211, 0.6);
+            transform: translateY(-2px);
         }
+
         .btn:active {
             transform: translateY(0);
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>檔案預覽</h1>
-        <p>您可以在下方直接預覽內容，或點擊按鈕開啟原檔。</p>
+        <h1>Ave Mujica</h1>
+        <p class="subtitle">全新現貨，不用等五十年後的流星雨</p>
 
+        <!-- Google 雲端影片/檔案嵌入（支援全螢幕切換） -->
         <div class="iframe-container">
-           <iframe 
-    src="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview" 
-    allow="autoplay; fullscreen" 
-    allowfullscreen>
-</iframe>
+            <iframe 
+                src="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/preview" 
+                allow="autoplay; fullscreen" 
+                allowfullscreen>
+            </iframe>
         </div>
 
+        <!-- 操作按鈕 -->
         <div class="btn-container">
             <a href="https://drive.google.com/file/d/1p5fnnJggNINcGow-6N9ryp5sZZiyl2RA/view" 
                target="_blank" 
@@ -97,6 +152,10 @@
                 開啟 / 下載原始檔案
             </a>
         </div>
+
+        <footer>
+            <p>&copy; mujicahome | All Rights Reserved</p>
+        </footer>
     </div>
 
 </body>
