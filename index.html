@@ -222,16 +222,16 @@
 
     <script>
         function startExperience() {
-            // 1. 點擊瞬間立即預載你指定的新第一首影片
+            // 1. 點擊瞬間立即預載第一首影片
             const iframe = document.getElementById('videoIframe');
             iframe.src = "https://drive.google.com/file/d/1lcOnM359n9zAWimsdo4FF8FzunB8ZImR/preview?autoplay=1";
 
             // 2. 開啟慢速帷幕滑開動畫 (4.2 秒)
             document.getElementById('curtainContainer').classList.add('open');
 
-            // 3. 零延遲播放 444.mp3 開場音效，音量設定為 70% (0.7)
+            // 3. 零延遲播放 444.mp3 開場音效，音量調整為 100% (1.0)
             const sound = document.getElementById('openSound');
-            sound.volume = 0.7;
+            sound.volume = 1.0;
             sound.currentTime = 0;
             sound.play().catch(e => console.log("音效受限:", e));
         }
